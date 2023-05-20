@@ -1,0 +1,15 @@
+#input-text {
+    background: blue;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    width: auto;
+    min-width: 400px;
+    caret-color: red;
+}
+
+#input-text::after {
+    content: "█";
+}

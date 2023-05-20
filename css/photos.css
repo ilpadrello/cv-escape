@@ -1,0 +1,17 @@
+.photo-animation {
+    height: 200px;
+    width: 200px;
+    /*background: url('your-photo.jpg') no-repeat;*/
+    background-size: 100% 0;
+    animation: revealPhoto 3s steps(12, end) forwards;
+}
+
+@keyframes revealPhoto {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 100%;
+    }
+}
