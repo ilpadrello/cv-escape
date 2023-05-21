@@ -14,8 +14,8 @@ Starting neural network
     html: `
     <pre>
 
-> To run the software in english type run-en.exe 
-> Pour lancer le logiciel en français run-fr.exe
+> To run the software in english type: run-en.exe 
+> Pour lancer le logiciel en français: run-fr.exe
 </pre>`,
     correctAnwsers: ["run-en.exe", "run-fr.exe"],
     animation: "typewriter",

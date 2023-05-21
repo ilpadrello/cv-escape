@@ -1,12 +1,13 @@
 import escapeListEn from "./enigmas-en/index.js";
+import escapeListFr from "./enigmas-fr/index.js";
 
-const escapeListFr = escapeListEn;
 let escapeList = escapeListEn;
 const output = document.getElementById("output");
 const inputText = document.getElementById("input-text");
 
 let escapeIndex = 0;
 let hintIndex = 0;
+let wrongAnswerText = "Access Denied";
 
 async function next() {
   let content = null;
@@ -66,8 +67,6 @@ function emptyInput() {
 async function answer() {
   const answer = removeBlock(inputText.value);
   emptyInput();
-  await emulateLoad();
-
   let content = escapeList[escapeIndex];
   if (content?.correctAnwsers) {
     if (
@@ -78,15 +77,20 @@ async function answer() {
       if (content.chooseLanguage) {
         if (answer.toLowerCase().includes("en")) {
           escapeList = escapeListEn;
+          document.getElementById("suggestion-aid").innerText =
+            "* Type hint to have a suggestion.";
         } else {
           escapeList = escapeListFr;
+          document.getElementById("suggestion-aid").innerText =
+            '* Tapez "aide" pour avoir une suggestion.';
         }
       }
       hintIndex = 0;
       escapeIndex++;
+      await emulateLoad(2);
       await next();
     } else {
-      if (answer === "hint" && content.hint) {
+      if ((answer === "hint" || answer === "aide") && content.hint) {
         await emulateLoad(2);
         await type(content.hint[hintIndex]);
         if (hintIndex < content.hint.length - 1) {
@@ -94,9 +98,11 @@ async function answer() {
         }
       } else {
         if (content.wrongAnswerAction) {
+          await emulateLoad(2);
           await type(content.wrongAnswerAction);
         } else {
-          await type("<p>Wrong</p>");
+          await emulateLoad(2);
+          await type(`<p>${wrongAnswerText}</p>`);
         }
       }
     }
@@ -133,7 +139,7 @@ async function type(html) {
     currentHTML += currentChar;
     output.innerHTML = currentHTML;
     scrollOutputToBottom(output);
-    await timeout(50);
+    await timeout(15);
   }
 }
 
@@ -163,16 +169,6 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
     if (["Enter"].includes(event.key)) {
       await answer();
-      //   let currentHtml = output.innerHTML;
-      //   let input = inputText.value;
-      //   const lastCharacter = input.slice(-1);
-      //   if (lastCharacter === "█") {
-      //     input = input.slice(0, -1);
-      //   }
-      //   currentHtml += `<p>${input}</p>`;
-      //   output.innerHTML = currentHtml;
-      //   inputText.value = "";
-
       scrollOutputToBottom(output);
     }
   });

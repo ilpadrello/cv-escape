@@ -24,8 +24,8 @@ a {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    height: 65vh;
-    width: 65vw;
+    height: 85vh;
+    width: 70vw;
     margin: 0 auto;
     padding: 20px;
 }
@@ -261,7 +261,7 @@ a {
     background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
     height: 100vh;
     color: white;
-    font: 1.3rem Inconsolata, monospace;
+    font: 1.5rem Inconsolata, monospace;
     background-repeat: no-repeat;
     background-size: cover;
 }

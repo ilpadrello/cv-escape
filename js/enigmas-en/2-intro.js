@@ -5,8 +5,8 @@ export default [
   },
   {
     clear: true,
-    html: `<div>
-          <pre style="color:#f75454">
+    html: `<div style="text-align:center;">
+          <pre style="color:#f75454; font-size: 1rem">
       
               ▓█████  ███▄ ▄███▓▓█████  ██▀███   ▄▄▄       █    ██ ▓█████▄ ▓█████ 
               ▓█   ▀ ▓██▒▀█▀ ██▒▓█   ▀ ▓██ ▒ ██▒▒████▄     ██  ▓██▒▒██▀ ██▌▓█   ▀ 
@@ -31,9 +31,13 @@ export default [
                               ░                                     ░           ░   
       
       </pre>
-      </div>`,
+      </div>
+      <p>Press Enter To Continue...</p>
+      `,
     animation: "header",
+    correctAnwsers: [""],
     loadAnimationAfter: 6,
+    hint: ["<p>Press Enter To Continue...</p>"],
   },
   {
     clear: true,
@@ -44,29 +48,28 @@ export default [
     <p>Are you here to know more about me ?</p>
     <p>of course you are! </p>
     <p>Who doesn't want to know about the only person capable of transfer his conciousness into a machine?</p>
-    <p>A copy of my latest resume is mandatory to continue, do you have one with you?</p>
-    <p>I would print you a copy, but my printer is out of ink</p>
-    <p>Are you ready? (y/yes)</p>
+    <br>
+    <br>
+    <p>Press Enter To Coninue...</p>
+       `,
+    loadAnimationAfter: 3,
+    correctAnwsers: [""],
+  },
+  {
+    clear: true,
+    html: `
+    <p>Im sorry but it seems that my code is stuck!</p>
+    <p>My programmer was smart and used captcha to prevent me to access memory!</p>
+    </br>
+    <p>I will need your help with to solve some captchas!</p>
+    </br>
+    <p>Also a copy of my latest resume is necessary to continue, do you have one with you?</p>
+    <p>I would print you a copy, but my printer is out of ink! Tell me when you're ready</p>
+    </br>
+    <p>Ready?(y/yes)</p>
        `,
     animation: "typewriter",
     correctAnwsers: ["y", "yes", "oui", "o"],
     wrongAnswerAction: "<p>Sorry I cound't understand...</p>",
-    loadAnimationAfter: true,
-  },
-  {
-    html: `
-    <p>My name was Simone PANEBIANCO, I was born in Italy, and since I was a little boy I dreamed about creating stuff
-    </p>
-    <p>At the age of 10 I've started making movies using Microsoft 3DMM</p>
-    <p>But It was only at the age of 15 that I'have discovered the coding pleasure</p>
-    <p>🔒██████ █ ████ █ ███</p>
-    <p>🔒█ ████ ███ ██ █████ ███ ████ ██</p>
-    <p>Im sorry it seems that my code is stuck! It looks like someone is trying to block me!</p>
-    <p>Im launching my unstuck program! But I will need your help with captchas!</p>
-    <p>Ready?(y/yes)</p>
-    `,
-    correctAnwsers: ["y", "yes", "oui", "o"],
-    wrongAnswerAction: "<p>Sorry I cound't understand...</p>",
-    clear: true,
   },
 ];
