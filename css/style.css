@@ -10,6 +10,10 @@ body {
     background: black;
 }
 
+a {
+    color: #fff;
+}
+
 .terminal img[src*="blob:"],
 .terminal video {
     max-width: 100%;
@@ -26,7 +30,10 @@ body {
     padding: 20px;
 }
 
-
+.table {
+    border: blue;
+    border-style: solid;
+}
 
 /* .input-text::after {
     content: "█";
@@ -62,6 +69,7 @@ body {
 
 #output {
     height: 80%;
+    overflow-y: scroll;
 }
 
 

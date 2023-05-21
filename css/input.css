@@ -1,5 +1,5 @@
 #input-text {
-    background: blue;
+    background: transparent;
     border: none;
     outline: none;
     font-family: inherit;
@@ -7,7 +7,7 @@
     font-size: inherit;
     width: auto;
     min-width: 400px;
-    caret-color: red;
+    caret-color: transparent;
 }
 
 #input-text::after {

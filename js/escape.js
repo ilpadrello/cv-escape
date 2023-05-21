@@ -1,83 +1,130 @@
-function timeout(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+import escapeListEn from "./enigmas-en/index.js";
+
+const escapeListFr = escapeListEn;
+let escapeList = escapeListEn;
+const output = document.getElementById("output");
+const inputText = document.getElementById("input-text");
+
+let escapeIndex = 0;
+let hintIndex = 0;
+
+async function next() {
+  let content = null;
+  let exit = false;
+  if (escapeIndex >= escapeList.length) {
+    console.log("Game ended");
+    await emulateLoad();
+    await type("game ended");
+  } else {
+    do {
+      if (escapeIndex < escapeList.length) {
+        content = escapeList[escapeIndex];
+        //Clear if needed;
+        if (content.clear) {
+          await clear();
+        }
+        if (content.loadAnimationBefore) {
+          await emulateLoad(content.loadAnimationBefore);
+        }
+        if (!content.animation || content.animation === "typewriter") {
+          await type(content.html);
+        }
+        if (content.animation === "type-load") {
+          await type(content.html, true);
+          await emulateLoad();
+        }
+        if (content.animation === "none") {
+          output.innerHTML += content.html;
+        }
+        if (content.animation === "header") {
+          await typeLine(content.html);
+        }
+        if (content.loadAnimationAfter) {
+          await emulateLoad(content.loadAnimationAfter);
+        }
+        if (!content.correctAnwsers) {
+          escapeIndex++;
+        } else {
+          exit = true;
+        }
+      }
+    } while (escapeIndex < escapeList.length && !exit);
+  }
+
+  console.log(escapeIndex, escapeList.length);
 }
 
-window.addEventListener("DOMContentLoaded", function () {
-  const inputText = document.getElementById("input-text");
+async function clear() {
+  output.innerHTML = "";
+}
 
-  function setFocusToEnd() {
-    const valueLength = inputText.value.length;
-    const lastCharacter = inputText.value.slice(-1);
-    if (lastCharacter === "█") {
-      inputText.setSelectionRange(valueLength - 1, valueLength - 1);
+function emptyInput() {
+  inputText.value = "";
+  inputText.focus();
+}
+
+async function answer() {
+  const answer = removeBlock(inputText.value);
+  emptyInput();
+  await emulateLoad();
+
+  let content = escapeList[escapeIndex];
+  if (content?.correctAnwsers) {
+    if (
+      content.correctAnwsers
+        .map((a) => a.toLowerCase())
+        .includes(answer.toLowerCase())
+    ) {
+      if (content.chooseLanguage) {
+        if (answer.toLowerCase().includes("en")) {
+          escapeList = escapeListEn;
+        } else {
+          escapeList = escapeListFr;
+        }
+      }
+      hintIndex = 0;
+      escapeIndex++;
+      await next();
     } else {
-      inputText.setSelectionRange(valueLength, valueLength);
+      if (answer === "hint" && content.hint) {
+        await emulateLoad(2);
+        await type(content.hint[hintIndex]);
+        if (hintIndex < content.hint.length - 1) {
+          hintIndex++;
+        }
+      } else {
+        if (content.wrongAnswerAction) {
+          await type(content.wrongAnswerAction);
+        } else {
+          await type("<p>Wrong</p>");
+        }
+      }
     }
   }
+}
 
-  setFocusToEnd(); // Set initial focus on page load
-
-  inputText.addEventListener("focus", setFocusToEnd);
-  inputText.addEventListener("click", setFocusToEnd);
-  inputText.addEventListener("input", setFocusToEnd);
-
-  document.body.addEventListener("click", setFocusToEnd);
-
-  inputText.addEventListener("keydown", function (event) {
-    const arrowKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-    if (arrowKeys.includes(event.key)) {
-      event.preventDefault();
+async function emulateLoad(rounds = 3) {
+  let currentHTML = output.innerHTML;
+  const loader = ["/", "-", "|", "/", "-", "|"];
+  for (let j = 0; j < rounds; j++) {
+    for (let i = 0; i < loader.length; i++) {
+      currentHTML += loader[i];
+      output.innerHTML = currentHTML;
+      scrollOutputToBottom(output);
+      await timeout(100);
+      currentHTML = currentHTML.slice(0, -1);
+      output.innerHTML = currentHTML;
     }
-  });
-
-  function updateInputWidth() {
-    const textLength = inputText.value.length;
-    const textWidth = textLength * 12; // Adjust the multiplier as needed
-
-    inputText.style.width = textWidth + "px";
   }
+}
 
-  inputText.addEventListener("input", updateInputWidth);
-});
-
-const inputText = document.getElementById("input-text");
-inputText.addEventListener("input", function () {
-  let value = this.value;
-  value = value.replace(/█/g, "");
-  this.value = value + "█";
-});
-
-setInterval(function () {
-  const inputText = document.getElementById("input-text");
-  const lastCharacter = inputText.value.slice(-1);
-
+function removeBlock(text) {
+  const lastCharacter = text.slice(-1);
   if (lastCharacter === "█") {
-    inputText.value = inputText.value.slice(0, -1);
-  } else {
-    inputText.value += "█";
+    return text.slice(0, -1);
   }
-}, 800);
-
-const output = document.getElementById("output");
-console.log(output);
-const htmlContent = [
-  {
-    html: `<h1>Welcome</h1>
-    <p>This is a <strong>typewriter effect</strong> example.</p>
-    <p>It supports HTML markup, line breaks, and various formatting.</p>
-    <ul>
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
-    <p>Feel free to modify and experiment! </p>`,
-    animation: "typewriter",
-  },
-  {
-    html: `<div class="photo-animation" style="background: url('asset/411-200x300.jpg') no-repeat;"></div>`,
-    animation: "none",
-  },
-];
+  return text;
+}
 
 async function type(html) {
   let currentHTML = output.innerHTML;
@@ -85,17 +132,52 @@ async function type(html) {
     const currentChar = html.charAt(charIndex);
     currentHTML += currentChar;
     output.innerHTML = currentHTML;
-    await timeout(25);
+    scrollOutputToBottom(output);
+    await timeout(50);
   }
 }
 
-(async function () {
-  for (const content of htmlContent) {
-    if (content.animation === "typewriter") {
-      await type(content.html);
-    }
-    if (content.animation === "none") {
-      output.innerHTML += content.html;
-    }
+async function typeLine(html) {
+  let currentHTML = output.innerHTML;
+  const lines = html.split("\n");
+  for (const line of lines) {
+    currentHTML += line + "\n";
+    output.innerHTML = currentHTML;
+    scrollOutputToBottom(output);
+    await timeout(100);
   }
+}
+
+// Function to scroll the div to the bottom
+function scrollOutputToBottom(output) {
+  output.scrollTop = output.scrollHeight + 100;
+}
+
+window.addEventListener("DOMContentLoaded", async function () {
+  const inputText = document.getElementById("input-text");
+  var output = document.getElementById("output");
+  inputText.addEventListener("keydown", async function (event) {
+    const arrowKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+    if (arrowKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+    if (["Enter"].includes(event.key)) {
+      await answer();
+      //   let currentHtml = output.innerHTML;
+      //   let input = inputText.value;
+      //   const lastCharacter = input.slice(-1);
+      //   if (lastCharacter === "█") {
+      //     input = input.slice(0, -1);
+      //   }
+      //   currentHtml += `<p>${input}</p>`;
+      //   output.innerHTML = currentHtml;
+      //   inputText.value = "";
+
+      scrollOutputToBottom(output);
+    }
+  });
+});
+
+(async () => {
+  await next();
 })();
