@@ -8,6 +8,7 @@ const inputText = document.getElementById("input-text");
 let escapeIndex = 0;
 let hintIndex = 0;
 let wrongAnswerText = "Access Denied";
+let allowAudio = true;
 
 async function next() {
   let content = null;
@@ -23,6 +24,11 @@ async function next() {
         //Clear if needed;
         if (content.clear) {
           await clear();
+        }
+        if (content.audio && allowAudio) {
+          const aud = new Audio(content.audio.path);
+          if (content.audio.volume) aud.volume = content.audio.volume;
+          aud.play();
         }
         if (content.loadAnimationBefore) {
           await emulateLoad(content.loadAnimationBefore);
@@ -65,6 +71,10 @@ function emptyInput() {
 }
 
 async function answer() {
+  const startAudio = new Audio("../asset/audio/FloppyDisk15.mp3");
+  const floppyFast = new Audio("../asset/audio/FloppyDiskHalf.mp3");
+  const winAudio = new Audio("../asset/audio/Correct2.mp3");
+  const incorrectAudio = new Audio("../asset/audio/wrong.mp3");
   const answer = removeBlock(inputText.value);
   emptyInput();
   let content = escapeList[escapeIndex];
@@ -85,25 +95,53 @@ async function answer() {
             '* Tapez "aide" pour avoir une suggestion.';
         }
       }
+
+      if (allowAudio) {
+        startAudio.play();
+        winAudio.play();
+      }
+
       hintIndex = 0;
       escapeIndex++;
       await emulateLoad(2);
       await next();
     } else {
-      if ((answer === "hint" || answer === "aide") && content.hint) {
-        await emulateLoad(2);
-        await type(content.hint[hintIndex]);
-        if (hintIndex < content.hint.length - 1) {
-          hintIndex++;
-        }
-      } else {
-        if (content.wrongAnswerAction) {
+      switch (answer) {
+        case "hint":
+        case "aide":
+          if (allowAudio) {
+            floppyFast.play();
+          }
           await emulateLoad(2);
-          await type(content.wrongAnswerAction);
-        } else {
-          await emulateLoad(2);
-          await type(`<p>${wrongAnswerText}</p>`);
-        }
+          await type(content.hint[hintIndex]);
+          if (hintIndex < content.hint.length - 1) {
+            hintIndex++;
+          }
+          break;
+        case "mute":
+          allowAudio = false;
+          background.volume = 0;
+          startFloppy.volume = 0;
+          break;
+        case "unmute":
+          background.volume = 0.5;
+          allowAudio = true;
+          break;
+        default:
+          if (content.wrongAnswerAction) {
+            await emulateLoad(2);
+            if (allowAudio) {
+              incorrectAudio.play();
+            }
+            await type(content.wrongAnswerAction);
+          } else {
+            await emulateLoad(2);
+            if (allowAudio) {
+              incorrectAudio.play();
+            }
+            await type(`<p>${wrongAnswerText}</p>`);
+          }
+          break;
       }
     }
   }

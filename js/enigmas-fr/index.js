@@ -10,14 +10,14 @@ import morse from "./9-morse.js";
 import last from "./10-last-page.js";
 //export default [...run, ...intro, ...educationCoordinates];
 export default [
-  // ...run,
-  // ...intro,
-  // ...educationCoordinates,
-  // ...flash,
-  // ...php,
-  // ...catania,
-  // ...m3dmm,
-  // ...ipssi,
-  // ...morse,
+  ...run,
+  ...intro,
+  ...educationCoordinates,
+  ...flash,
+  ...php,
+  ...catania,
+  ...m3dmm,
+  ...ipssi,
+  ...morse,
   ...last,
 ];

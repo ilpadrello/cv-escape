@@ -2,9 +2,13 @@ function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+let background;
+let startFloppy;
+
 window.addEventListener("DOMContentLoaded", function () {
   const inputText = document.getElementById("input-text");
-
+  background = new Audio("../asset/audio/Screen Flikering.mp3");
+  startFloppy = new Audio("../asset/audio/FloppyDisk15.mp3");
   function setFocusToEnd() {
     inputText.focus();
     const valueLength = inputText.value.length;
@@ -22,7 +26,28 @@ window.addEventListener("DOMContentLoaded", function () {
   inputText.addEventListener("click", setFocusToEnd);
   inputText.addEventListener("input", setFocusToEnd);
 
+  let audioOneTime = true;
   document.body.addEventListener("click", setFocusToEnd);
+  document.body.addEventListener("click", () => {
+    if (audioOneTime) {
+      if (typeof background.loop == "boolean") {
+        background.loop = true;
+      } else {
+        background.addEventListener(
+          "ended",
+          function () {
+            this.currentTime = 0;
+            this.play();
+          },
+          false
+        );
+      }
+      background.volume = 0.5;
+      startFloppy.play();
+      background.play();
+      audioOneTime = false;
+    }
+  });
 
   function updateInputWidth() {
     const textLength = inputText.value.length;

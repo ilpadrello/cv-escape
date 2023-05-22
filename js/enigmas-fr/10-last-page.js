@@ -15,6 +15,10 @@ export default [
         </pre>
         </div>`,
     animation: "header",
+    audio: {
+      path: "../asset/audio/ending-win.mp3",
+      volume: 0.5,
+    },
   },
   {
     html: `
@@ -31,19 +35,24 @@ export default [
     </br>
     <p>Certains de ces documents sont confidenciels, merci de ne pas les partager</p>
     <br>
+`,
+  },
+  {
+    html: `
+    <br>
     <p style="font-size:1.5em"><a href="https://github.com/ilpadrello/cv-escape" target="_blank">Repository De ce Projet 🖥</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="" target="_blank">Download IVOL CASTLE 🕍</a><p>
+    <p style="font-size:1.5em"><a href="./notTracked/Backup Castello 2 minecraft_spigot - ivol.rar" target="_blank">Download IVOL CASTLE 🕍</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="" target="_blank">New Port Bay Club Blender Obj 🎨</a><p>
+    <p style="font-size:1.5em"><a href="./notTracked/Hotel v1.09.blend" target="_blank">New Port Bay Club Blender Obj 🎨</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="" target="_blank">Render de L'hotel 🎞</a><p>
+    <p style="font-size:1.5em"><a href="./notTracked/Front Hotel 2Sec Rend.mp4" target="_blank">Render de L'hotel 🎞</a><p>
     </br>
     <p style="font-size:1.5em"><a href="./notTracked/Presentation SAB TAG MANAGER.pdf" target="_blank">Presentation SAB Card MAKER 🧾</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="" target="_blank">Un pe de musique 🎵</a><p>
+    <p style="font-size:1.5em"><a href="./notTracked/Promenade.mp3" target="_blank">Un pe de musique 🎵</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="" target="_blank">Encore plus de musique 🎵</a><p>
+    <p style="font-size:1.5em"><a href="./notTracked/theloop.mp3" target="_blank">Encore plus de musique 🎵</a><p>
     </br>
     <p style="font-size:1.5em"><a href="https://youtu.be/bgr1DEO-X2Q" target="_blank">Les Travaux Vu par les employés 🎬</a><p>
     </br>
@@ -51,8 +60,14 @@ export default [
     </br>
     <p style="font-size:1.5em"><a href="https://youtu.be/NCyHkZtT9tM" target="_blank">Documentaire Travaux Hotel NPBC 🎬</a><p>
     </br>
-    <p style="font-size:1.5em"><a href="https://youtu.be/rtcsZkfROYY" target="_blank">3 Year of Timelapse 🎬</a><p>
+    <p style="font-size:1.5em"><a href="https://youtu.be/rtcsZkfROYY" target="_blank">3 Ans de Timelapse 🎬</a><p>
     <br>
 `,
+    animation: "header",
+  },
+  {
+    html: `<br>
+    <p>Code Crée par Simone PANEBIANCO</p>
+    <p>Merci d'avoir participé</p>`,
   },
 ];
