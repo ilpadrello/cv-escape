@@ -44,7 +44,7 @@ export default [
       "21.14",
     ],
     hint: [
-      "<p>Regarde l'heure</p>",
+      "<p>Trouvez l'heure</p>",
       "<p>Dans le CV, il y a une montre, quelle heure est-il ?</p>",
       "<p>Attention: La montre n'est pas droit!</p>",
       "<p>9-15</p>",

@@ -44,7 +44,7 @@ export default [
       "21.14",
     ],
     hint: [
-      "Look at the time",
+      "Find the the time",
       "In the resume there is a watch, what time is it?",
       "Is the watch in the resume inclined? Find Twelve O'Clock",
       "9-15",

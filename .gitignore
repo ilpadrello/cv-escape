@@ -1,1 +1,3 @@
 *:Zone.Identifier
+notTracked/*
+!notTracked/.gitkeep
