@@ -71,10 +71,10 @@ function emptyInput() {
 }
 
 async function answer() {
-  const startAudio = new Audio("../asset/audio/FloppyDisk15.mp3");
-  const floppyFast = new Audio("../asset/audio/FloppyDiskHalf.mp3");
-  const winAudio = new Audio("../asset/audio/Correct2.mp3");
-  const incorrectAudio = new Audio("../asset/audio/wrong.mp3");
+  const startAudio = new Audio("./asset/audio/FloppyDisk15.mp3");
+  const floppyFast = new Audio("./asset/audio/FloppyDiskHalf.mp3");
+  const winAudio = new Audio("./asset/audio/Correct2.mp3");
+  const incorrectAudio = new Audio("./asset/audio/wrong.mp3");
   const answer = removeBlock(inputText.value);
   emptyInput();
   let content = escapeList[escapeIndex];

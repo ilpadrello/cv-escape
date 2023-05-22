@@ -5,10 +5,10 @@ function timeout(ms) {
 let background;
 let startFloppy;
 
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", async function () {
   const inputText = document.getElementById("input-text");
-  background = new Audio("../asset/audio/Screen Flikering.mp3");
-  startFloppy = new Audio("../asset/audio/FloppyDisk15.mp3");
+  background = new Audio("./asset/audio/Screen Flikering.mp3");
+  startFloppy = new Audio("./asset/audio/FloppyDisk15.mp3");
   function setFocusToEnd() {
     inputText.focus();
     const valueLength = inputText.value.length;
@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   let audioOneTime = true;
   document.body.addEventListener("click", setFocusToEnd);
-  document.body.addEventListener("click", () => {
+  document.body.addEventListener("click", async () => {
     if (audioOneTime) {
       if (typeof background.loop == "boolean") {
         background.loop = true;
@@ -43,8 +43,13 @@ window.addEventListener("DOMContentLoaded", function () {
         );
       }
       background.volume = 0.5;
-      startFloppy.play();
-      background.play();
+      try {
+        await startFloppy.play();
+        await background.play();
+      } catch (error) {
+        console.log(error);
+      }
+
       audioOneTime = false;
     }
   });
