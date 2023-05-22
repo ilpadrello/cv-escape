@@ -1,7 +1,7 @@
 import escapeListEn from "./enigmas-en/index.js";
 import escapeListFr from "./enigmas-fr/index.js";
 
-let escapeList = escapeListEn;
+let escapeList = escapeListFr;
 const output = document.getElementById("output");
 const inputText = document.getElementById("input-text");
 

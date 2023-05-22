@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", function () {
   const inputText = document.getElementById("input-text");
 
   function setFocusToEnd() {
+    inputText.focus();
     const valueLength = inputText.value.length;
     const lastCharacter = inputText.value.slice(-1);
     if (lastCharacter === "█") {
