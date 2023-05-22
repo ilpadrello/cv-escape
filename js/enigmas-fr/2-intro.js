@@ -1,6 +1,6 @@
 export default [
   {
-    html: "<p>> run emaraude-escape-cv.exe</p>",
+    html: "<p>> run emeraude-escape-cv.exe</p>",
     animation: "type-load",
   },
   {
