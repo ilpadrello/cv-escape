@@ -13,6 +13,8 @@ Starting neural network
 ***         You are allowed to use internet             ***
 ***********************************************************
 
+To start The Audio Click Anywhere in the page
+
 Command List:
   hint: get a suggestion
   mute: mute sound

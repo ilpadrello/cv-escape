@@ -6,6 +6,20 @@ export default [
 Kernel Version 2.3.15
 Loading operating system 
 Starting neural network
+
+***********************************************************
+***  For a better experience use a desktop computer     ***
+***             This expirience has audio               ***
+***         You are allowed to use internet             ***
+***********************************************************
+
+To start The Audio Click Anywhere in the page
+
+Command List:
+  hint: get a suggestion
+  mute: mute sound
+unmute: unmute sound
+
 </pre>
         `,
     animation: "typewriter",
@@ -15,7 +29,7 @@ Starting neural network
     <pre>
 
 > To run the software in english type: run-en.exe 
-> Pour lancer le logiciel en français: run-fr.exe
+> Pour le logiciel en français tapez : run-fr.exe
 </pre>`,
     correctAnwsers: ["run-en.exe", "run-fr.exe"],
     animation: "typewriter",
