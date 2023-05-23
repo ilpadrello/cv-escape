@@ -6,6 +6,7 @@ export default [
     <p>Ce n'était pas facile car mon français était vraiment basique</p>
     </br>
     <p>Heureusement, j'ai trouvé un emploi chez Disney, où l'anglais est obligatoire</p>
+    <p>En plus, les années passées en contact direct avec des clients m'ont appris à déchiffrer leurs besoins.</p>
     <p>J'ai créé des logiciels avec eux,</p>
     <p>et ensemble, nous avons réalisé un documentaire sur le plus grand hôtel français : le Disney's New Port Bay Club...</p>
       <pre>

@@ -6,6 +6,7 @@ export default [
       <p>That was not easy since my french was really basic</p>
       </br>
       <p>Fortunately I have found a Job at Disney, there english is mandatory</p>
+      <p>Moreover, the years spent in direct contact with clients have taught me to decipher their needs</p>
       <p>I helped them create some softwares, and</p>
       <p>with them I'have created a documentary about the biggest french hotel: The Disney's New Port Bay Club...</p>
       <pre>
