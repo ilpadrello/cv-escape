@@ -30,6 +30,8 @@ a {
     padding: 20px;
 }
 
+
+
 .table {
     border: blue;
     border-style: solid;
@@ -77,17 +79,7 @@ a {
     --background: #031e11;
 }
 
-@media (min-width: 800px) {
-    :root {
-        --size: 1.2;
-    }
-}
 
-@media (min-width: 1200px) {
-    :root {
-        --size: 1.5;
-    }
-}
 
 /* to see yourself like in a mirror */
 .self {
@@ -345,5 +337,24 @@ a {
     .flicker,
     .scanlines:before {
         animation: none !important;
+    }
+}
+
+@media (max-width: 1149px) {
+    :root {
+        --size: 1.2
+        ;
+    }
+
+    #terminal {
+        height: 95vh;
+        width: 95vw;
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width: 1150px) and (max-width: 1200) {
+    :root {
+        --size: 1.5;
     }
 }
