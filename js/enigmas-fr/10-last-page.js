@@ -33,7 +33,7 @@ export default [
     <br>
     <p>En guise de récompense, voici une partie du travail que j'ai réalisé (malheureusement, la plupart a été perdu avec le temps)</p>
     </br>
-    <p>Certains de ces documents sont confidenciels, merci de ne pas les partager</p>
+    <p>Certains de ces documents sont confidentiels, merci de ne pas les partager</p>
     <br>
 `,
   },
